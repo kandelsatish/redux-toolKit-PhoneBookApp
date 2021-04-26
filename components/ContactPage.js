@@ -23,7 +23,6 @@ export default function ContactPage({item}) {
                         <Feather name="phone-call" size={25} color={'grey'}/>
                         <Text style={styles.text}>{item.phonenumber}</Text>
                     </View>
-
                 </View>
                 <TouchableOpacity style={styles.icon} onPress={()=>dispach(deleteContact(item))}>
                     <Icons name="delete-forever" size={30} color={'grey'}/>

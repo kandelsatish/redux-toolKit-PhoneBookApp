@@ -3,6 +3,7 @@ import { Input, Item, Form, Card, Button } from 'native-base'
 import { View, Text, StyleSheet, Touchable, TouchableOpacity } from 'react-native'
 import { addContact, deleteContact } from '../app/contactSlice'
 import { useSelector, useDispatch } from 'react-redux'
+import PushNotification from 'react-native-push-notification'
 export default function Forms() {
   const [user, setUser] = useState({
     username: '',
@@ -11,8 +12,13 @@ export default function Forms() {
   const contact = useSelector(state => state.contact.contact);
   const dispach = useDispatch();
   const handelAdd = () => {
-    if (user.username != "" && user.phonenumber != "") {
+    if (user.username != "" && user.phonenumber != null) {
       dispach(addContact(user));
+      PushNotification.localNotification({
+        title: "New Contact", 
+        message: "There is a new Contact in your list",
+        largeIconUrl: "https://st.depositphotos.com/1875497/3781/i/950/depositphotos_37810929-stock-photo-books-on-white.jpg",
+      })
       setUser({ username: '', phonenumber: null });
     }else{
       alert("Some fields are empty");
